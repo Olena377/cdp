@@ -32,7 +32,7 @@ var argv = require('minimist')(process.argv.slice(2), {
 
 var conf = {
     less: 'src/less/*.less',
-    images: ['src/images/**/*.{png,svg}', '!src/images/icons/**'],
+    images: ['src/images/**/*.{png,svg}','!src/images/icons/**'],
     icons: 'src/images/icons/*.png',
     html: 'src/*.html',
     js: {
