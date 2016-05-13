@@ -121,18 +121,6 @@ gulp.task('script', ['clean', 'bower'], function() {
         .pipe(source('cdp.js'))
         .pipe(gulp.dest(conf.build.js));
 });
-
-
-gulp.task('clean', function () {
-    return del([conf.build.folder, conf.build.tmpFolders]);
-});
-
-gulp.task('build', ['style', 'images', 'html', 'script']);
-
-gulp.task('watch', ['build'], function () {
-    return gulp.watch(conf.less, ['style-watch']);
-});
-
 gulp.task('eslint', function () {
     return gulp.src([
             '**/main.js',
@@ -177,6 +165,18 @@ gulp.task("plato", function() {
             }
         }));
 });
+
+gulp.task('clean', function () {
+    return del([conf.build.folder, conf.build.tmpFolders]);
+});
+
+gulp.task('build', ['style', 'images', 'html', 'script']);
+
+gulp.task('watch', ['build'], function () {
+    return gulp.watch(conf.less, ['style-watch']);
+});
+
+
 
 function errorHandler(error) {
     util.log(util.colors.red('Error'), error.message);
