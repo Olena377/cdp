@@ -17,7 +17,6 @@ var filter = require('gulp-filter');
 var browserify = require('browserify');
 var debowerify = require('debowerify');
 var source = require('vinyl-source-stream');
-var uglifyify = require('uglifyify');
 var eslint = require('gulp-eslint');
 var postcss     = require('gulp-postcss');
 var reporter    = require('postcss-reporter');
