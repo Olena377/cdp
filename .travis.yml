@@ -1,4 +1,8 @@
 language: node_js
 node_js:
-  - "4.4"
+- '4.4'
 script: gulp build
+deploy:
+  provider: heroku
+  api_key:
+    secure: e8b80f8f-718f-4a90-8567-2d75d65a7616
