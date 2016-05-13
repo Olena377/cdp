@@ -63,7 +63,7 @@ gulp.task('bower', function () {
         .pipe(gulp.dest('bower_components'));
 });
 
-gulp.task('style', ['clean', 'bower', 'images'], function () {
+gulp.task('style', ['clean', 'bower', 'images', 'less-lint'], function () {
     return gulp.src([bootstrap.less, conf.less])
         .pipe(less())
         .pipe(autoprefixer(['last 2 version']))
@@ -109,7 +109,7 @@ gulp.task('html', ['clean'], function () {
         .pipe(gulp.dest(conf.build.html));
 });
 
-gulp.task('script', ['clean', 'bower'], function() {
+gulp.task('script', ['clean', 'bower', 'eslint'], function() {
     var result = browserify({
         entries: conf.js.folder + '/' + conf.js.main,
         debug: true
@@ -121,6 +121,18 @@ gulp.task('script', ['clean', 'bower'], function() {
         .pipe(source('cdp.js'))
         .pipe(gulp.dest(conf.build.js));
 });
+
+
+gulp.task('clean', function () {
+    return del([conf.build.folder, conf.build.tmpFolders]);
+});
+
+gulp.task('build', ['style', 'images', 'html', 'script', 'plato']);
+
+gulp.task('watch', ['build'], function () {
+    return gulp.watch(conf.less, ['style-watch']);
+});
+
 gulp.task('eslint', function () {
     return gulp.src([
             '**/main.js',
@@ -165,18 +177,6 @@ gulp.task("plato", function() {
             }
         }));
 });
-
-gulp.task('clean', function () {
-    return del([conf.build.folder, conf.build.tmpFolders]);
-});
-
-gulp.task('build', ['style', 'images', 'html', 'script']);
-
-gulp.task('watch', ['build'], function () {
-    return gulp.watch(conf.less, ['style-watch']);
-});
-
-
 
 function errorHandler(error) {
     util.log(util.colors.red('Error'), error.message);
