@@ -1,3 +1,5 @@
+window.jQuery = require('jquery');
+require('bootstrap');
 var capitalized = require('capitalized-pkg');
 
 document.getElementById('modal-button').addEventListener('click', function() {
